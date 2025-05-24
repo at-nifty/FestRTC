@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Controller</title>
+</head>
+<body>
+  <h1>WebRTC Controller</h1>
+  <div>
+    <label for="password">password please:</label>
+    <input type="text" id="password" readonly>
+    <button id="generatePassword">generate password</button>
+  </div>
+<div>
+    <h2>Local Video</h2>
+    <video id="localVideo" width="320" height="240" autoplay muted></video>
+  </div>
+  <div>
+    <h2>Remote SDP (to monitor)</h2>
+    <textarea id="offerSdp" cols="60" rows="10" readonly placeholder="Generated Offer SDP"></textarea><br>
+    <button id="generateOffer">Generate Offer</button>
+  </div>
+  <div>
+    <h2>Monitor SDP (from monitor)</h2>
+    <textarea id="answerSdp" cols="60" rows="10" placeholder="Paste Answer SDP here"></textarea><br>
+    <button id="setAnswer">Set Answer</button>
+  </div>
+  <div>
+    <h2>Local ICE Candidates</h2>
+    <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="Local ICE candidates will appear here"></textarea>
+  </div>
+  <div>
+    <h2>Remote ICE Candidates (from monitor)</h2>
+    <textarea id="remoteIceCandidatesFromMonitor" cols="60" rows="5" placeholder="Paste remote ICE candidates here"></textarea><br>
+    <button id="addRemoteIceCandidatesController">Add Remote ICE</button>
+  </div>
+  <div>
+    <h2>Remote Video</h2>
+    <video id="remoteVideo" width="320" height="240" autoplay></video>
+  </div>
+  <script src="controller.js"></script>
+</body>
+</html>

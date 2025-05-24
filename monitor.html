@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Monitor</title>
+</head>
+<body>
+  <h1>WebRTC Monitor</h1>
+  <div>
+    <label for="password">password please:</label>
+    <input type="text" id="password" readonly>
+  </div>
+  <div>
+    <h2>Remote SDP (from controller)</h2>
+    <textarea id="offerSdp" cols="60" rows="10" placeholder="Paste Offer SDP here"></textarea><br>
+    <button id="setOffer">Set Offer</button>
+  </div>
+  <div>
+    <h2>Local SDP (to controller)</h2>
+    <textarea id="answerSdp" cols="60" rows="10" readonly placeholder="Generated Answer SDP"></textarea><br>
+    <button id="generateAnswer">Generate Answer</button>
+  </div>
+  <div>
+    <h2>Local ICE Candidates</h2>
+    <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="Local ICE candidates will appear here"></textarea>
+  </div>
+  <div>
+    <h2>Remote ICE Candidates (from controller)</h2>
+    <textarea id="remoteIceCandidatesFromController" cols="60" rows="5" placeholder="Paste remote ICE candidates here"></textarea><br>
+    <button id="addRemoteIceCandidatesMonitor">Add Remote ICE</button>
+  </div>
+  <div>
+    <h2>Remote Video</h2>
+    <video id="remoteVideo" width="640" height="480" autoplay></video>
+  </div>
+  <script src="monitor.js"></script>
+</body>
+</html>

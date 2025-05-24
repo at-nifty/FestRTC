@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Monitor</title>
+  <meta charset="UTF-8">
+  <title>モニター</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/adapter-latest.js"></script>
 </head>
 <body>
-  <h1>WebRTC Monitor</h1>
-  <div>
-    <label for="password">password please:</label>
-    <input type="text" id="password" readonly>
-  </div>
-  <div>
-    <h2>Remote SDP (from controller)</h2>
-    <textarea id="offerSdp" cols="60" rows="10" placeholder="Paste Offer SDP here"></textarea><br>
-    <button id="setOffer">Set Offer</button>
-  </div>
-  <div>
-    <h2>Local SDP (to controller)</h2>
-    <textarea id="answerSdp" cols="60" rows="10" readonly placeholder="Generated Answer SDP"></textarea><br>
-    <button id="generateAnswer">Generate Answer</button>
-  </div>
-  <div>
-    <h2>Local ICE Candidates</h2>
-    <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="Local ICE candidates will appear here"></textarea>
-  </div>
-  <div>
-    <h2>Remote ICE Candidates (from controller)</h2>
-    <textarea id="remoteIceCandidatesFromController" cols="60" rows="5" placeholder="Paste remote ICE candidates here"></textarea><br>
-    <button id="addRemoteIceCandidatesMonitor">Add Remote ICE</button>
-  </div>
-  <div>
-    <h2>Remote Video</h2>
-    <video id="remoteVideo" width="640" height="480" autoplay></video>
+  <div class="page-content">
+    <div class="container">
+      <h1>WebRTC モニター</h1>
+      <p>新しい自動フロー: 「コントローラーセッションファイル読込」ボタンを使い、コントローラーから受け取った <code>controller-session-data.json</code> を読み込んでください。処理後、モニター応答ファイル (<code>monitor-response-data.json</code>) が自動的にダウンロードされます。そのファイルをコントローラーに渡してください。</p>
+      <div class="form-group">
+        <label for="password">パスワード (コントローラーファイルから読込)</label>
+        <input type="text" id="password" readonly>
+      </div>
+      <div class="form-group">
+          <button id="loadMonitorFromFileButton" class="primary">コントローラーセッションファイル読込</button>
+          <input type="file" id="fileMonitorInput" accept=".json" style="display: none;">
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>コントローラーのオファーSDP (ファイルから読込)</h2>
+      <div class="sdp-controls">
+        <label for="offerSdp" style="display:none;">コントローラーのオファーSDP</label>
+        <textarea id="offerSdp" cols="60" rows="10" readonly placeholder="コントローラーファイル読込後に表示されます"></textarea>
+        <!-- <button id="setOffer">1. オファー情報 設定</button> -->
+      </div>
+    </div>
+    
+    <div class="container">
+      <h2>コントローラーのICE候補 (ファイルから読込)</h2>
+      <div class="ice-controls">
+        <label for="remoteIceCandidatesFromController" style="display:none;">コントローラーのICE候補</label>
+        <textarea id="remoteIceCandidatesFromController" cols="60" rows="5" readonly placeholder="コントローラーファイル読込後に表示されます"></textarea>
+        <!-- <button id="addRemoteIceCandidatesMonitor">コントローラーのICE候補 追加</button> -->
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>ローカルアンサーSDP (自動生成)</h2>
+      <div class="sdp-controls">
+        <label for="answerSdp" style="display:none;">ローカルアンサーSDP</label>
+        <textarea id="answerSdp" cols="60" rows="10" readonly placeholder="コントローラーファイル処理後に自動生成されます"></textarea>
+        <!-- <button id="generateAnswer" disabled>2. アンサー再生成</button> -->
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>ローカルICE候補 (自動生成)</h2>
+      <div class="ice-controls">
+        <label for="localIceCandidates" style="display:none;">ローカルICE候補</label>
+        <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="コントローラーファイル処理後に表示されます"></textarea>
+      </div>
+    </div>
+
+    <div class="container video-group">
+        <h2>リモートビデオ</h2>
+        <video id="remoteVideo" width="640" height="480" autoplay></video>
+    </div>
   </div>
   <script src="monitor.js"></script>
 </body>

@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Controller</title>
+  <meta charset="UTF-8">
+  <title>コントローラー</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/adapter-latest.js"></script>
 </head>
 <body>
-  <h1>WebRTC Controller</h1>
-  <div>
-    <label for="password">password please:</label>
-    <input type="text" id="password" readonly>
-    <button id="generatePassword">generate password</button>
-  </div>
-<div>
-    <h2>Local Video</h2>
-    <video id="localVideo" width="320" height="240" autoplay muted></video>
-  </div>
-  <div>
-    <h2>Remote SDP (to monitor)</h2>
-    <textarea id="offerSdp" cols="60" rows="10" readonly placeholder="Generated Offer SDP"></textarea><br>
-    <button id="generateOffer">Generate Offer</button>
-  </div>
-  <div>
-    <h2>Monitor SDP (from monitor)</h2>
-    <textarea id="answerSdp" cols="60" rows="10" placeholder="Paste Answer SDP here"></textarea><br>
-    <button id="setAnswer">Set Answer</button>
-  </div>
-  <div>
-    <h2>Local ICE Candidates</h2>
-    <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="Local ICE candidates will appear here"></textarea>
-  </div>
-  <div>
-    <h2>Remote ICE Candidates (from monitor)</h2>
-    <textarea id="remoteIceCandidatesFromMonitor" cols="60" rows="5" placeholder="Paste remote ICE candidates here"></textarea><br>
-    <button id="addRemoteIceCandidatesController">Add Remote ICE</button>
-  </div>
-  <div>
-    <h2>Remote Video</h2>
-    <video id="remoteVideo" width="320" height="240" autoplay></video>
+  <div class="page-content">
+    <div class="container">
+      <h1>WebRTC コントローラー</h1>
+      <p>新しい自動フロー: 「セッション開始とファイルエクスポート」ボタンをクリックすると、接続情報ファイル(<code>controller-session-data.json</code>)が自動的に生成・ダウンロードされます。そのファイルをモニター側に渡してください。</p>
+      <div class="form-group">
+        <label for="password">パスワード (自動生成)</label>
+        <input type="text" id="password" readonly>
+        <button id="copyPasswordButton" class="copy-button secondary">パスワードコピー</button> 
+      </div>
+      <div class="form-group">
+          <button id="startSessionButton" class="primary">コントローラーセッション開始とファイルエクスポート</button>
+      </div>
+      <div class="form-group">
+          <label for="fileInput">ステップ2: モニター応答ファイル読込</label>
+          <button id="loadMonitorResponseButton" class="secondary">モニター応答ファイル選択</button>
+          <input type="file" id="fileInput" accept=".json" style="display: none;">
+      </div>
+    </div>
+
+    <div class="container video-group">
+        <h2>ローカルメディア</h2>
+        <div class="form-group">
+            <label for="cameraSelect">カメラ選択:</label>
+            <select id="cameraSelect" class="form-control mb-10"></select>
+            <p id="cameraPermissionStatus" class="text-muted small"></p>
+        </div>
+        <div class="form-group">
+            <label for="audioSelect">マイク選択:</label>
+            <select id="audioSelect" class="form-control mb-10"></select>
+            <p id="audioPermissionStatus" class="text-muted small"></p>
+        </div>
+        <video id="localVideo" width="320" height="240" autoplay muted></video>
+    </div>
+
+    <div class="container">
+      <div class="sdp-controls">
+        <label for="offerSdp">オファーSDP (自動生成)</label>
+        <textarea id="offerSdp" cols="60" rows="10" readonly placeholder="セッション開始後に表示されます"></textarea>
+      </div>
+    </div>
+    
+    <div class="container">
+      <h2>ローカルICE候補 (自動生成)</h2>
+      <div class="ice-controls">
+        <label for="localIceCandidates" style="display:none;">ローカルICE候補</label>
+        <textarea id="localIceCandidates" cols="60" rows="5" readonly placeholder="セッション開始後に表示されます"></textarea>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>モニターのアンサーSDP (ファイルから読込)</h2>
+      <div class="sdp-controls">
+        <label for="answerSdp" style="display:none;">モニターのアンサーSDP</label>
+        <textarea id="answerSdp" cols="60" rows="10" placeholder="モニター応答ファイル読込後に表示されます" readonly></textarea>
+        <!-- <button id="setAnswer">4. アンサー設定</button> -->
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>モニターのICE候補 (ファイルから読込)</h2>
+      <div class="ice-controls">
+        <label for="remoteIceCandidatesFromMonitor" style="display:none;">モニターのICE候補</label>
+        <textarea id="remoteIceCandidatesFromMonitor" cols="60" rows="5" placeholder="モニター応答ファイル読込後に表示されます" readonly></textarea>
+        <!-- <button id="addRemoteIceCandidatesController">5. リモートICE追加</button> -->
+      </div>
+    </div>
+
+    <div class="container video-group">
+        <h2>リモートビデオ</h2>
+        <video id="remoteVideo" width="320" height="240" autoplay></video>
+    </div>
   </div>
   <script src="controller.js"></script>
 </body>

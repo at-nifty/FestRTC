@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Mode Selection</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    button { display: block; margin-bottom: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
-  </style>
+  <meta charset="UTF-8">
+  <title>モード選択 - WebRTCリモートコントロール</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Choose WebRTC Mode</h1>
-  <button id="openController">Open Controller</button>
-  <button id="openMonitor">Open Monitor</button>
+  <div class="selection-container">
+    <h1>WebRTC リモートコントロールアプリケーション</h1>
+    <div class="button-group">
+        <button id="openController">コントローラーを開く</button>
+        <p class="role-description">ローカルのカメラとマイクをリモートで表示・操作します。</p>
+    </div>
+    <div class="button-group">
+        <button id="openMonitor">モニターを開く</button>
+        <p class="role-description">リモートのカメラとマイクを表示・監視します。</p>
+    </div>
+  </div>
   <script src="select.js"></script>
 </body>
 </html>
